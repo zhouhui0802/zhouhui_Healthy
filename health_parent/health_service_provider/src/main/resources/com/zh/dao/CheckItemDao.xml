@@ -19,4 +19,57 @@
         </if>
     </select>
 
+    <!--根据检查项id查询中间关系表中存在多少关联关系-->
+    <select id="findCountByCheckItemId" parameterType="int" resultType="long">
+        select count(*)
+        from t_checkgroup_checkitem
+        where checkitem_id = #{checkitem_id}
+    </select>
+
+    <!--删除数据-->
+    <delete id="deleteById" parameterType="int">
+        delete
+        from t_checkitem
+        where id = #{id}
+    </delete>
+
+    <!--更新检查项数据-->
+    <update id="edit" parameterType="com.zh.pojo.CheckItem">
+        update t_checkitem
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="attention != null">
+                attention = #{attention},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--查找指定检查项数据-->
+    <select id="findById" parameterType="int" resultType="com.zh.pojo.CheckItem">
+        select *
+        from t_checkitem
+        where id = #{id}
+    </select>
+
 </mapper>
