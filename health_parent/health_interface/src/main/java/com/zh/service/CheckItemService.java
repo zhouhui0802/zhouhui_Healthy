@@ -4,6 +4,8 @@ import com.zh.entity.PageResult;
 import com.zh.entity.QueryPageBean;
 import com.zh.pojo.CheckItem;
 
+import java.util.List;
+
 public interface CheckItemService {
 
     /**
@@ -19,4 +21,6 @@ public interface CheckItemService {
     void edit(CheckItem checkItem);
 
     CheckItem findById(Integer id);
+
+    List<CheckItem> findAll();
 }

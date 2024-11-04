@@ -3,6 +3,7 @@ package com.zh.dao;
 import com.github.pagehelper.Page;
 import com.zh.pojo.CheckItem;
 
+import java.util.List;
 
 
 public interface CheckItemDao {
@@ -18,5 +19,7 @@ public interface CheckItemDao {
     public void edit(CheckItem checkItem);
 
     public CheckItem findById(Integer id);
+
+    public List<CheckItem> findAll();
 
 }

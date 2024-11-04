@@ -11,6 +11,7 @@ import com.zh.service.CheckItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service(interfaceClass = CheckItemService.class)
@@ -67,5 +68,10 @@ public class CheckItemServiceImpl implements CheckItemService {
     @Override
     public CheckItem findById(Integer id) {
         return checkItemDao.findById(id);
+    }
+
+    @Override
+    public List<CheckItem> findAll() {
+        return checkItemDao.findAll();
     }
 }

@@ -9,6 +9,8 @@ import com.zh.pojo.CheckItem;
 import com.zh.service.CheckItemService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/checkitem")
 public class CheckItemController {
@@ -74,7 +76,18 @@ public class CheckItemController {
             e.printStackTrace();
             return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
         }
-
-
     }
+
+    @GetMapping("/findAll")
+    public Result findAll(){
+        try{
+            List<CheckItem> list=checkItemService.findAll();
+            return new Result(true,MessageConstant.QUERY_CHECKITEM_SUCCESS,list);
+        }catch(Exception e){
+            e.printStackTrace();
+            return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
+        }
+    }
+
+
 }
