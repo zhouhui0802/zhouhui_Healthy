@@ -37,4 +37,12 @@ public interface CheckGroupService {
      * @return 指定检查组关联的所有检查项
      */
     List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
+
+    /**
+     * 编辑检查组
+     *
+     * @param checkGroup   检查组信息
+     * @param checkItemIds 与检查组关联的检查项id
+     */
+    void edit(CheckGroup checkGroup, Integer[] checkItemIds);
 }

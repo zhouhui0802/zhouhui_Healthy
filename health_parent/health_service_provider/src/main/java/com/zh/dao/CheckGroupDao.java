@@ -40,4 +40,19 @@ public interface CheckGroupDao {
      */
     List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
 
+    /**
+     * 更新检查组信息
+     *
+     * @param checkGroup 检查组
+     */
+    void edit(CheckGroup checkGroup);
+
+    /**
+     * 删除检查组与检查项的关联关系
+     *
+     * @param id 检查组id
+     */
+    void deleteAssociation(Integer id);
+
+
 }

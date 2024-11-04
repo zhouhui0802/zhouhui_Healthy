@@ -71,4 +71,24 @@ public class CheckGroupController {
         }
     }
 
+
+    /**
+     * 编辑检查组
+     *
+     * @param checkGroup   检查组信息
+     * @param checkItemIds 与检查组关联的检查项id
+     * @return 新增成功或者失败提示
+     */
+    @PutMapping("/edit/{checkItemIds}")
+    public Result edit(@RequestBody CheckGroup checkGroup, @PathVariable("checkItemIds") Integer[] checkItemIds) {
+        try {
+            checkGroupService.edit( checkGroup, checkItemIds );
+        } catch (Exception e) {
+            //服务调用失败
+            return new Result(false, MessageConstant.EDIT_CHECKGROUP_FAIL);
+        }
+        //服务调用成功
+        return new Result(true, MessageConstant.EDIT_CHECKGROUP_SUCCESS);
+    }
+
 }
