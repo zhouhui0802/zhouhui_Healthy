@@ -10,7 +10,10 @@ import com.zh.pojo.CheckGroup;
 import com.zh.service.CheckGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service(interfaceClass = CheckGroupService.class)
@@ -44,6 +47,16 @@ public class CheckGroupServiceImpl implements CheckGroupService {
         PageHelper.startPage(currentPage, pageSize);
         Page<CheckGroup> page=checkGroupDao.selectByCondition(queryString);
         return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    @Override
+    public CheckGroup findById(Integer id) {
+        return checkGroupDao.findById( id );
+    }
+
+    @Override
+    public List<Integer> findCheckItemIdsByCheckGroupId(Integer id) {
+        return checkGroupDao.findCheckItemIdsByCheckGroupId( id );
     }
 
 }

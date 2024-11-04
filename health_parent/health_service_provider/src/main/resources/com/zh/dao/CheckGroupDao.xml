@@ -30,5 +30,19 @@
         </if>
     </select>
 
+    <!--根据ID查询检查组-->
+    <select id="findById" parameterType="int" resultType="com.zh.pojo.CheckGroup">
+        select *
+        from t_checkgroup
+        where id = #{id}
+    </select>
+
+    <!--根据检查组ID查询关联的多个检查项ID，查询中间关系表-->
+    <select id="findCheckItemIdsByCheckGroupId" parameterType="int" resultType="int">
+        select checkitem_id
+        from t_checkgroup_checkitem
+        where checkgroup_id = #{id}
+    </select>
+
 
 </mapper>

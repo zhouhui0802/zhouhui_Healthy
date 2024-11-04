@@ -9,6 +9,8 @@ import com.zh.pojo.CheckGroup;
 import com.zh.service.CheckGroupService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/checkgroup")
 public class CheckGroupController {
@@ -38,6 +40,35 @@ public class CheckGroupController {
     @PostMapping("/findPage")
     public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
         return checkGroupService.pageQuery( queryPageBean );
+    }
+
+    @GetMapping("/findById/{id}")
+    public Result findById(@PathVariable("id") Integer id) {
+        try{
+            CheckGroup checkGroup=checkGroupService.findById(id);
+            return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
+    }
+
+    /**
+     * 根据检查组id查询对应的所有检查项id
+     *
+     * @param id 检查组id
+     * @return 指定检查组关联的所有检查项
+     */
+    @GetMapping("/findCheckItemIdsByCheckGroupId/{id}")
+    public Result findCheckItemIdsByCheckGroupId(@PathVariable("id") Integer id) {
+        try {
+            List<Integer> checkItemIds = checkGroupService.findCheckItemIdsByCheckGroupId( id );
+            return new Result(true, MessageConstant.QUERY_CHECKITEM_SUCCESS,checkItemIds);
+        } catch (Exception e) {
+            e.printStackTrace();
+            //服务调用失败
+            return new Result(false, MessageConstant.QUERY_CHECKITEM_FAIL);
+        }
     }
 
 }

@@ -3,6 +3,7 @@ package com.zh.dao;
 import com.github.pagehelper.Page;
 import com.zh.pojo.CheckGroup;
 
+import java.util.List;
 import java.util.Map;
 
 public interface CheckGroupDao {
@@ -22,4 +23,21 @@ public interface CheckGroupDao {
     void setCheckGroupAndCheckItem(Map<String, Integer> map);
 
     Page<CheckGroup> selectByCondition(String queryString);
+
+    /**
+     * 查询检查组
+     *
+     * @param id 检查组id
+     * @return 对应检查组信息
+     */
+    CheckGroup findById(Integer id);
+
+    /**
+     * 根据检查组id查询对应的所有检查项id
+     *
+     * @param id 检查组id
+     * @return 检查项id集合
+     */
+    List<Integer> findCheckItemIdsByCheckGroupId(Integer id);
+
 }
