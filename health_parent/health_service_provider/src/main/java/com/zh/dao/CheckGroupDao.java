@@ -1,5 +1,6 @@
 package com.zh.dao;
 
+import com.github.pagehelper.Page;
 import com.zh.pojo.CheckGroup;
 
 import java.util.Map;
@@ -19,4 +20,6 @@ public interface CheckGroupDao {
      * @param map 检查组id合检查项id
      */
     void setCheckGroupAndCheckItem(Map<String, Integer> map);
+
+    Page<CheckGroup> selectByCondition(String queryString);
 }
