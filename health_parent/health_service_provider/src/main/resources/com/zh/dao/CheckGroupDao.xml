@@ -77,6 +77,10 @@
         where checkgroup_id = #{id}
     </delete>
 
-
+    <!--查询所有检查组-->
+    <select id="findAll" resultType="com.zh.pojo.CheckGroup">
+        select *
+        from t_checkgroup
+    </select>
 
 </mapper>

@@ -45,4 +45,11 @@ public interface CheckGroupService {
      * @param checkItemIds 与检查组关联的检查项id
      */
     void edit(CheckGroup checkGroup, Integer[] checkItemIds);
+
+    /**
+     * 查询所欲检查组
+     *
+     * @return 检查组信息集合
+     */
+    List<CheckGroup> findAll();
 }

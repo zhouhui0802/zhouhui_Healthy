@@ -54,5 +54,11 @@ public interface CheckGroupDao {
      */
     void deleteAssociation(Integer id);
 
+    /**
+     * 查询所有检查组
+     *
+     * @return 检查组信息集合
+     */
+    List<CheckGroup> findAll();
 
 }

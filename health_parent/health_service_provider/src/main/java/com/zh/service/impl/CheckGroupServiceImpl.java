@@ -63,6 +63,11 @@ public class CheckGroupServiceImpl implements CheckGroupService {
         this.setCheckGroupAndCheckItem( checkGroup.getId(), checkItemIds );
     }
 
+    @Override
+    public List<CheckGroup> findAll() {
+        return checkGroupDao.findAll();
+    }
+
     public void setCheckGroupAndCheckItem(Integer checkGroupId, Integer[] checkitemIds) {
         if(checkitemIds!=null&&checkitemIds.length>0){
             for (Integer checkitemId : checkitemIds) {
