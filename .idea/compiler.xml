@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="health_service_provider" />
         <module name="health_backend" />
+        <module name="quartzdemo" />
         <module name="health_common" />
         <module name="health_interface" />
       </profile>

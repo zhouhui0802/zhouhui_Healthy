@@ -1,13 +1,18 @@
 package com.zh.controller;
 
 import com.zh.constant.MessageConstant;
+import com.zh.constant.RedisConstant;
+import com.zh.entity.PageResult;
+import com.zh.entity.QueryPageBean;
 import com.zh.entity.Result;
 import com.zh.pojo.Setmeal;
 import com.zh.service.SetmealService;
 import com.zh.utils.QiniuUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.web.multipart.MultipartFile;
+import redis.clients.jedis.JedisPool;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -19,6 +24,9 @@ public class SetmealController {
 
     @Reference
     private SetmealService setmealService;
+
+    @Autowired
+    private JedisPool jedisPool;
 
     /**
      * 文件上传
@@ -38,7 +46,8 @@ public class SetmealController {
         try {
             //将文件上传到七牛云服务器
             QiniuUtils.uploadToQiNiu( imgFile.getBytes(), fileName );
-
+            //将上传图片名称存入Redis，基于Redis的Set集合存储
+            jedisPool.getResource().sadd( RedisConstant.SETMEAL_PIC_RESOURCES, fileName );
         } catch (IOException e) {
             e.printStackTrace();
             //服务调用失败
@@ -65,6 +74,17 @@ public class SetmealController {
         }
         //新增套餐成功
         return new Result(true,MessageConstant.ADD_SETMEAL_SUCCESS);
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param queryPageBean 分页条件
+     * @return 分页结果数据封装对象
+     */
+    @PostMapping("/findPage")
+    public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
+        return setmealService.pageQuery( queryPageBean );
     }
 
 }

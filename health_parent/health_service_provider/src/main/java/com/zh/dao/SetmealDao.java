@@ -1,5 +1,6 @@
 package com.zh.dao;
 
+import com.github.pagehelper.Page;
 import com.zh.pojo.Setmeal;
 
 import java.util.Map;
@@ -20,4 +21,12 @@ public interface SetmealDao {
      * @param map 套餐id合检查组id
      */
     void setSetmealAndCheckGroup(Map<String, Integer> map);
+
+    /**
+     * 分页查询体检套餐
+     *
+     * @param queryString 分页条件
+     * @return 页面结果
+     */
+    Page<Setmeal> selectByCondition(String queryString);
 }
